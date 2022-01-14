@@ -1,0 +1,84 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: NoahArkStaking
+    network: fuji
+    source:
+      address: "0xdc1468DcaF670236073763F979421301a7db64c6"
+      abi: NoahArkStaking
+      startBlock: 4827951
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - NoahArkStaking
+      abis:
+        - name: NoahArkStaking
+          file: ./abis/NoahArkStaking.json
+        - name: StakingHelper
+          file: ./abis/StakingHelper.json
+        - name: sNoahArkERC20
+          file: ./abis/sNoahArkERC20.json
+        - name: nrkTotalSupplyCalculator
+          file: ./abis/nrkTotalSupplyCalculator.json
+        - name: NoahArkERC20
+          file: ./abis/NoahArkERC20.json
+        - name: UniswapV2Pair
+          file: ./abis/UniswapV2Pair.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: StakeEvent(uint256,address)
+          handler: handleStake
+        - event: UnStakeEvent(uint256,address)
+          handler: handleUnstake
+      file: ./src/NoahArkStaking.ts
+  - kind: ethereum/contract
+    name: sNoahArkERC20
+    network: fuji
+    source:
+      address: "0x4892FC94e2Cc75a283652f8E61D1E364eC902C08"
+      abi: sNoahArkERC20
+      startBlock: 4827951
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - sNoahArkERC20
+      abis:
+        - name: sNoahArkERC20
+          file: ./abis/sNoahArkERC20.json
+        - name: NoahArkERC20
+          file: ./abis/NoahArkERC20.json
+        - name: UniswapV2Pair
+          file: ./abis/UniswapV2Pair.json
+      eventHandlers:
+        - event: rebaseEvent(uint256,uint256)
+          handler: rebaseFunction
+      file: ./src/sNoahArkERC20.ts
+  - kind: ethereum/contract
+    name: NoahArkBondDepository
+    network: fuji
+    source:
+      address: "0xc7Ae48F623688AA7A8D9E88590E73545342c4d30"
+      abi: BondDepository
+      startBlock: 4827951
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BondDepository
+      abis:
+        - name: BondDepository
+          file: ./abis/BondDepository.json
+      eventHandlers:
+        - event: BondCreated(uint256,indexed uint256,indexed uint256,indexed uint256)
+          handler: bondFunction
+        - event: BondRedeemed(indexed address,uint256,uint256)
+          handler: redeemFunction
+      file: ./src/BondDepository.ts

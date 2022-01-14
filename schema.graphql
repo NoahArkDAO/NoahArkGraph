@@ -1,0 +1,76 @@
+type Rebase @entity {
+  id: ID!
+  transaction: String!
+  amount: BigDecimal!
+  stakedNrks: BigDecimal!
+  percentage: BigDecimal!
+  contract: String!
+  timestamp: BigInt!
+  value: BigDecimal!
+}
+
+type StakeRecord @entity {
+  id: ID!
+  transaction: String!
+  timestamp: BigInt!
+  stakeNrk: BigDecimal!
+  stakeAddress: String!
+  contractNrk: BigDecimal!
+  isStake: Boolean!
+}
+
+type BondRecord @entity {
+  id: ID!
+  transaction: String!
+  timestamp: BigInt!
+  bondAmount: BigDecimal!
+  contract: String!
+  payout: BigDecimal!
+  priceInUSD: BigDecimal!
+  bondAddress: String!
+}
+
+type RedeemRecord @entity {
+  id: ID!
+  transaction: String!
+  timestamp: BigInt!
+  bondAmount: BigDecimal!
+  contract: String!
+  payout: BigDecimal!
+  remindingPayout: BigDecimal!
+  redeemAddress: String!
+}
+
+type ProtocolMetric @entity {
+  id: ID!
+  timestamp: BigInt!
+  nrkCirculatingSupply: BigDecimal!
+  sNrkCirculatingSupply: BigDecimal!
+  totalSupply: BigDecimal!
+  nrkPrice: BigDecimal!
+  marketCap: BigDecimal!
+  totalValueLocked: BigDecimal!
+  treasuryRiskFreeValue: BigDecimal!
+  treasuryMarketValue: BigDecimal!
+  nextEpochRebase: BigDecimal!
+  nextDistributedNrk: BigDecimal!
+  treasuryDaiRiskFreeValue: BigDecimal!
+  treasuryDaiMarketValue: BigDecimal!
+  currentAPY: BigDecimal!
+  runwayCurrent: BigDecimal!
+  treasuryNrkDaiPOL: BigDecimal!
+  runway2dot5k: BigDecimal!
+  runway5k: BigDecimal!
+  runway7dot5k: BigDecimal!
+  runway10k: BigDecimal!
+  runway20k: BigDecimal!
+  runway50k: BigDecimal!
+  runway70k: BigDecimal!
+  runway100k: BigDecimal!
+}
+
+type LastBlock @entity {
+  id: ID!
+  number: BigInt!
+  timestamp: BigInt!
+}
